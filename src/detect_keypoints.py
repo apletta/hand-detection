@@ -6,20 +6,20 @@ import json
 import os
 import sys
 
-protoFile = "pose_deploy.prototxt"
-weightsFile = "../hand-model/pose_iter_102000.caffemodel"
+protoFile = "../model-param/pose_deploy.prototxt"
+weightsFile = "../../hand-model/pose_iter_102000.caffemodel"
 nPoints = 22
 POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] ]
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
 # read in image
-data_file_name = "data.json"
+data_file_name = "../data/data.json"
 if not os.path.exists(data_file_name): # data file exists, append new data
     print("\nData file {} does not exist, please run take_hand_pics.py to generate data.\n".format(data_file_name))
     sys.exit()
 with open(data_file_name) as json_file:
     data = json.load(json_file)
-    filepath = "images/train/"
+    filepath = "../images/train/"
     for img_index in range(1,int(data["num_pics"])+1):
         frame = cv2.imread(filepath + data["pics"][str(img_index)]["img_name"])
 
@@ -83,9 +83,9 @@ with open(data_file_name) as json_file:
         cv2.imshow('Output-Original', frameOriginal)
 
 
-        cv2.imwrite('images/keypoint-detection/Output-Keypoints.jpg', frameCopy)
-        cv2.imwrite('images/keypoint-detection/Output-Skeleton.jpg', frame)
-        cv2.imwrite('images/keypoint-detection/Output-Original.jpg', frameOriginal)
+        # cv2.imwrite('../images/keypoint-detection/Output-Keypoints.jpg', frameCopy)
+        # cv2.imwrite('../images/keypoint-detection/Output-Skeleton.jpg', frame)
+        # cv2.imwrite('../images/keypoint-detection/Output-Original.jpg', frameOriginal)
 
         print("Total time taken : {:.3f}".format(time.time() - t))
         cv2.waitKey(0)

@@ -28,7 +28,7 @@ while True:
         label = input("enter label 0,1,2,3,4,5: ")
 
         # log data info
-        data_file_name = "data.json"
+        data_file_name = "../data/data.json"
 
         # save data
         if os.path.exists(data_file_name): # data file exists, append new data
@@ -45,7 +45,7 @@ while True:
         with open(data_file_name, "w") as json_file:
             json.dump(data, json_file)
 
-        filepath = "images/train/"
+        filepath = "../images/train/"
         cv2.imwrite(filepath+img_name, frame)
         print("    {} written!".format(img_name))
         img_counter += 1
