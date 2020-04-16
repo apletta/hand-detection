@@ -66,9 +66,9 @@ cv2.imshow('Output-Skeleton', frame)
 cv2.imshow('Output-Original', frameOriginal)
 
 
-cv2.imwrite('../images/keypoint-detection/Output-Keypoints.jpg', frameCopy)
-cv2.imwrite('../images/keypoint-detection/Output-Skeleton.jpg', frame)
-cv2.imwrite('../images/keypoint-detection/Output-Original.jpg', frameOriginal)
+cv2.imwrite('../images/sample-keypoint-output/Output-Keypoints.jpg', frameCopy)
+cv2.imwrite('../images/sample-keypoint-output/Output-Skeleton.jpg', frame)
+cv2.imwrite('../images/sample-keypoint-output/Output-Original.jpg', frameOriginal)
 
 print("Total time taken : {:.3f}".format(time.time() - t))
 
