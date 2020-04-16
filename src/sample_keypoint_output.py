@@ -3,14 +3,16 @@ import cv2
 import time
 import numpy as np
 
-protoFile = "pose_deploy.prototxt"
-weightsFile = "../hand-model/pose_iter_102000.caffemodel"
+# load model info
+protoFile = "../model-param/pose_deploy.prototxt"
+weightsFile = "../../hand-model/pose_iter_102000.caffemodel"
 nPoints = 22
 POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] ]
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
 # read image
-frame = cv2.imread("images/hand_sample.png")
+frame = cv2.imread("../images/train/hand_train002.png")
+frameOriginal = np.copy(frame)
 frameCopy = np.copy(frame)
 frameWidth = frame.shape[1]
 frameHeight = frame.shape[0]
@@ -61,10 +63,12 @@ for pair in POSE_PAIRS:
 
 cv2.imshow('Output-Keypoints', frameCopy)
 cv2.imshow('Output-Skeleton', frame)
+cv2.imshow('Output-Original', frameOriginal)
 
 
-cv2.imwrite('images/keypoint-detection/Output-Keypoints.jpg', frameCopy)
-cv2.imwrite('images/keypoint-detection/Output-Skeleton.jpg', frame)
+cv2.imwrite('../images/keypoint-detection/Output-Keypoints.jpg', frameCopy)
+cv2.imwrite('../images/keypoint-detection/Output-Skeleton.jpg', frame)
+cv2.imwrite('../images/keypoint-detection/Output-Original.jpg', frameOriginal)
 
 print("Total time taken : {:.3f}".format(time.time() - t))
 

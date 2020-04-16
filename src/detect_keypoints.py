@@ -6,13 +6,14 @@ import json
 import os
 import sys
 
+# load model info
 protoFile = "../model-param/pose_deploy.prototxt"
 weightsFile = "../../hand-model/pose_iter_102000.caffemodel"
 nPoints = 22
 POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] ]
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
-# read in image
+# read in images from saved data
 data_file_name = "../data/data.json"
 if not os.path.exists(data_file_name): # data file exists, append new data
     print("\nData file {} does not exist, please run take_hand_pics.py to generate data.\n".format(data_file_name))
