@@ -5,22 +5,23 @@ import numpy as np
 import json
 import os
 import sys
-
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 # load model info
-protoFile = "../model-param/pose_deploy.prototxt"
-weightsFile = "../../hand-model/pose_iter_102000.caffemodel"
+
+protoFile = os.path.join(THIS_FOLDER, '../model-param/pose_deploy.prototxt')
+weightsFile = os.path.join(THIS_FOLDER, '../../hand-model/pose_iter_102000.caffemodel')
 nPoints = 22
 POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] ]
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
 # read in images from saved data
-data_file_name = "../data/data.json"
+data_file_name = os.path.join(THIS_FOLDER, '../data/data.json')
 if not os.path.exists(data_file_name): # data file exists, append new data
     print("\nData file {} does not exist, please run take_hand_pics.py to generate data.\n".format(data_file_name))
     sys.exit()
 with open(data_file_name) as json_file:
     data = json.load(json_file)
-    filepath = "../images/train/"
+    filepath = os.path.join(THIS_FOLDER, '../images/train/')
     for img_index in range(1,int(data["num_pics"])+1):
         frame = cv2.imread(filepath + data["pics"][str(img_index)]["img_name"])
 

@@ -12,6 +12,7 @@ print("\nTo take picture,\
        \n    2) Input label in terminal")
 print("To quit, press 'ESC'\n")
 
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 while True:
     ret, frame = cam.read()
     cv2.imshow("test", frame)
@@ -28,7 +29,7 @@ while True:
         label = input("enter label 0,1,2,3,4,5: ")
 
         # log data info
-        data_file_name = "../data/data.json"
+        data_file_name = os.path.join(THIS_FOLDER, '../data/data.json')
 
         # save data
         if os.path.exists(data_file_name): # data file exists, append new data
@@ -42,10 +43,12 @@ while True:
         img_name = "hand_train{:03d}.png".format(img_counter)
         data["pics"][img_counter] = {"label":label, "img_name":img_name, "keypoints":[]}
 
+        
         with open(data_file_name, "w") as json_file:
             json.dump(data, json_file)
 
-        filepath = "../images/train/"
+        # filepath = "../images/train/"
+        filepath = os.path.join(THIS_FOLDER, '../images/train/')
         cv2.imwrite(filepath+img_name, frame)
         print("    {} written!".format(img_name))
         img_counter += 1
