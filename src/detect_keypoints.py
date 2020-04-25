@@ -10,7 +10,7 @@ THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
 protoFile = os.path.join(THIS_FOLDER, '../model-param/pose_deploy.prototxt')
 weightsFile = os.path.join(THIS_FOLDER, '../../hand-model/pose_iter_102000.caffemodel')
-nPoints = 22
+nPoints = 21
 POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] ]
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
