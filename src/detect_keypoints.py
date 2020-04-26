@@ -22,9 +22,13 @@ if not os.path.exists(data_file_name): # data file exists, append new data
 with open(data_file_name) as json_file:
     data = json.load(json_file)
     filepath = os.path.join(THIS_FOLDER, '../images/train/')
-    for img_index in range(1,int(data["num_pics"])+1):
-        frame = cv2.imread(filepath + data["pics"][str(img_index)]["img_name"])
 
+    startIndex = int(input("Enter starting index: "))
+
+    for img_index in range(startIndex,int(data["num_pics"])+1):
+        print()
+        print("image : {}".format(data["pics"][str(img_index)]["img_name"]))
+        frame = cv2.imread(filepath + data["pics"][str(img_index)]["img_name"])
         frameOriginal = np.copy(frame)
         frameCopy = np.copy(frame)
         frameWidth = frame.shape[1]
@@ -81,8 +85,8 @@ with open(data_file_name) as json_file:
 
         # display images
         cv2.imshow('Output-Keypoints', frameCopy)
-        cv2.imshow('Output-Skeleton', frame)
-        cv2.imshow('Output-Original', frameOriginal)
+        # cv2.imshow('Output-Skeleton', frame)
+        # cv2.imshow('Output-Original', frameOriginal)
 
 
         # cv2.imwrite('../images/keypoint-detection/Output-Keypoints.jpg', frameCopy)

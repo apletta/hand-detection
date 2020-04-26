@@ -40,10 +40,10 @@ while True:
             data = {"num_pics":img_counter, "pics":{}}
         data["num_pics"] = img_counter
 
-        img_name = "hand_train{:03d}.png".format(img_counter)
+        img_name = "hand_train{:04d}.png".format(img_counter)
         data["pics"][img_counter] = {"label":label, "img_name":img_name, "keypoints":[]}
 
-        
+
         with open(data_file_name, "w") as json_file:
             json.dump(data, json_file)
 
