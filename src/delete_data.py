@@ -3,8 +3,26 @@ import os
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
+# get test vs training data
+pic_type = int(input("Test (1) or Train (2) : "))
+while pic_type not in [1,2]:
+    print("\nPlease make valid selection.")
+    pic_type = int(input("Test (1) or Train (2) : "))
+print()
+
 pic_to_delete = int(input("Enter int number of pic to delete\n(ex. to delete data associated with hand_train0003.png, enter '3')\ndelete : "))
-data_file_name = os.path.join(THIS_FOLDER, '../data/data.json')
+
+# log data info
+if pic_type == 1: # test
+    data_file_name = os.path.join(THIS_FOLDER, '../data/data_test.json')
+    pic_path = os.path.join(THIS_FOLDER, '../images/test/')
+    file_label = "test"
+else: # train
+    data_file_name = os.path.join(THIS_FOLDER, '../data/data_train.json')
+    pic_path = os.path.join(THIS_FOLDER, '../images/train/')
+    file_label = "train"
+
+
 with open(data_file_name) as json_file:
     # read in data
     data = json.load(json_file)
@@ -14,8 +32,6 @@ if str(pic_to_delete) in data["pics"]:
 
     # delete pic image file
     num_pics = int(data["num_pics"])
-    pic_path = os.path.join(THIS_FOLDER, '../images/train')
-
 
     # case for deleting last pic
     if pic_to_delete == num_pics:
@@ -25,7 +41,13 @@ if str(pic_to_delete) in data["pics"]:
 
             # decrement pics after deleted pic
             new_label = data["pics"][str(i)]["label"]
-            new_img_name = "hand_train{:04d}.png".format(int(data["pics"][str(i)]["img_name"][10:14])-1)
+
+            if pic_type == 1: # test
+                img_index = int(data["pics"][str(i)]["img_name"][9:13])
+            else: # train
+                img_index = int(data["pics"][str(i)]["img_name"][10:14])
+
+            new_img_name = "hand_{}{:04d}.png".format(file_label, img_index-1)
             new_keypoints = data["pics"][str(i)]["keypoints"]
             data["pics"][str(i-1)] = {"label": new_label, "img_name": new_img_name, "keypoints": new_keypoints}
 
