@@ -14,14 +14,27 @@ nPoints = 21
 POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,11],[11,12],[0,13],[13,14],[14,15],[15,16],[0,17],[17,18],[18,19],[19,20] ]
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
+# get test vs training data
+pic_type = int(input("Test (1) or Train (2) : "))
+while pic_type not in [1,2]:
+    print("\nPlease make valid selection.")
+    pic_type = int(input("Test (1) or Train (2) : "))
+print()
+
+# log data info
+if pic_type == 1: # test
+    data_file_name = os.path.join(THIS_FOLDER, '../data/data_test.json')
+    filepath = os.path.join(THIS_FOLDER, '../images/test/')
+else: # train
+    data_file_name = os.path.join(THIS_FOLDER, '../data/data_train.json')
+    filepath = os.path.join(THIS_FOLDER, '../images/train/')
+
 # read in images from saved data
-data_file_name = os.path.join(THIS_FOLDER, '../data/data.json')
 if not os.path.exists(data_file_name): # data file exists, append new data
     print("\nData file {} does not exist, please run take_hand_pics.py to generate data.\n".format(data_file_name))
     sys.exit()
 with open(data_file_name) as json_file:
     data = json.load(json_file)
-    filepath = os.path.join(THIS_FOLDER, '../images/train/')
 
     startIndex = int(input("Enter starting index: "))
 

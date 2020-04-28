@@ -12,10 +12,16 @@ print("\nTo take picture,\
        \n    2) Input label in terminal")
 print("To quit, press 'ESC'\n")
 
+# get test vs training data
+pic_type = int(input("Test (1) or Train (2) : "))
+while pic_type not in [1,2]:
+    print("\nPlease make valid selection.")
+    pic_type = int(input("Test (1) or Train (2) : "))
+
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 while True:
     ret, frame = cam.read()
-    cv2.imshow("test", frame)
+    cv2.imshow("Capture", frame)
     if not ret:
         break
     k = cv2.waitKey(1)
@@ -29,7 +35,14 @@ while True:
         label = input("enter label 0,1,2,3,4,5: ")
 
         # log data info
-        data_file_name = os.path.join(THIS_FOLDER, '../data/data.json')
+        if pic_type == 1: # test
+            data_file_name = os.path.join(THIS_FOLDER, '../data/data_test.json')
+            filepath = os.path.join(THIS_FOLDER, '../images/test/')
+            file_label = "test"
+        else: # train
+            data_file_name = os.path.join(THIS_FOLDER, '../data/data_train.json')
+            filepath = os.path.join(THIS_FOLDER, '../images/train/')
+            file_label = "train"
 
         # save data
         if os.path.exists(data_file_name): # data file exists, append new data
@@ -40,15 +53,14 @@ while True:
             data = {"num_pics":img_counter, "pics":{}}
         data["num_pics"] = img_counter
 
-        img_name = "hand_train{:04d}.png".format(img_counter)
+        img_name = "hand_{}{:04d}.png".format(file_label, img_counter)
         data["pics"][img_counter] = {"label":label, "img_name":img_name, "keypoints":[]}
 
 
         with open(data_file_name, "w") as json_file:
             json.dump(data, json_file)
 
-        # filepath = "../images/train/"
-        filepath = os.path.join(THIS_FOLDER, '../images/train/')
+
         cv2.imwrite(filepath+img_name, frame)
         print("    {} written!".format(img_name))
         img_counter += 1
