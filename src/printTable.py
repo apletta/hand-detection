@@ -1,4 +1,4 @@
-def printTable(header, data):
+def printTable(header, data, align="center"):
     """
     Prints table with columns of header and data.
 
@@ -11,6 +11,9 @@ def printTable(header, data):
         list of lists, each inner list is a data line
         data line must index with header appropriately
         ex. data = [[1, 2, 3],[1, 2, 3]]
+    align : str in ["left", "center", "right"]
+        desired alignment for data, default = "center"
+        ex. align = "right"
     """
 
     # print headers
@@ -34,5 +37,10 @@ def printTable(header, data):
         for i,value in enumerate(line):
             if i == 0 :
                 print("| ",end="")
-            print(str(value).center(col_widths[i]), end=" | ")
+            if align == "left":
+                print(str(value).ljust(col_widths[i]), end=" | ")
+            elif align == "right":
+                print(str(value).rjust(col_widths[i]), end=" | ")
+            else: # align = center
+                print(str(value).center(col_widths[i]), end=" | ")
         print()
