@@ -8,6 +8,6 @@ Note: To run the files in this repository, [download the caffe model here](http:
 
 <img src="https://github.com/apletta/hand-detection/blob/master/images/file_tree.png" alt="images/file_tree.png" width="40%">
 
-### Sample Keypoint Output
+### Sample Keypoint Extraction Output 
 #### Original image: &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; Keypoints: &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; Skeleton: 
 <img src="https://github.com/apletta/hand-detection/blob/master/images/sample-keypoint-output/Output-Original.jpg" alt="images/file_tree.png" width="30%"> <img src="https://github.com/apletta/hand-detection/blob/master/images/sample-keypoint-output/Output-Keypoints.jpg" alt="images/file_tree.png" width="30%"> <img src="https://github.com/apletta/hand-detection/blob/master/images/sample-keypoint-output/Output-Skeleton.jpg" alt="images/file_tree.png" width="30%">
