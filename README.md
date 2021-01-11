@@ -1,5 +1,6 @@
 # hand-detection
-Multi-class hand shape detection using binary classifiers. Final project for CS/ECE/ME 532 at UW-Madison.
+Multi-class hand shape detection using binary classifiers. Final project for CS/ECE/ME 532 at UW-Madison. 
+- For final tutorial guide see [GestureDetection-PLETTA-BUSH-LIN.pdf](https://github.com/apletta/hand-detection/blob/master/GestureDetection-PLETTA-BUSH-LIN.pdf)
 
 Keypoint extraction performed using [OpenCV implementation](https://www.learnopencv.com/hand-keypoint-detection-using-deep-learning-and-opencv/) of [Carnegie Mellon University Paper](https://arxiv.org/pdf/1704.07809.pdf). 
 
